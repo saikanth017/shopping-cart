@@ -5,6 +5,8 @@ import Cart from "./pages/cart.js";
 import Shop from "./pages/shop.js";
 import React, { createContext, useState } from "react";
 import { PRODUCTS } from "./components/products";
+import ProductData from "./pages/productdata.js";
+import Footer from "./components/footer";
 
 export const ShopContext = createContext(null);
 
@@ -36,14 +38,32 @@ function App() {
 
   const [cartItems, setCartItems] = useState(getCart());
   const [duplicateCartItems, setDuplicateCartItems] = useState(getCart());
+  const [cartLength, setCartLength] = useState(0);
 
   const addToCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+    setCartLength((prev) => prev + 1);
   };
 
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    setCartLength((prev) => prev - 1);
   };
+
+  console.log(cartLength);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [categoryQuery, setcategoryQuery] = useState("");
+
+  const handleSearchChange = (query) => {
+    setSearchQuery(query.target.value);
+  };
+  console.log(searchQuery);
+
+  const handleCategoryChange = (query) => {
+    setcategoryQuery(query.target.value);
+  };
+  console.log(categoryQuery);
 
   const contextValue = {
     cartItems,
@@ -51,6 +71,11 @@ function App() {
     removeFromCart,
     calculateCheckoutAmount,
     clearCheckout,
+    handleSearchChange,
+    searchQuery,
+    handleCategoryChange,
+    categoryQuery,
+    cartLength,
   };
 
   return (
@@ -61,6 +86,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Shop />}></Route>
             <Route path="cart" element={<Cart />}></Route>
+            <Route path="/product/:productID" element={<ProductData />}></Route>
           </Routes>
         </BrowserRouter>
       </ShopContext.Provider>

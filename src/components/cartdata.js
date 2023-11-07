@@ -23,7 +23,11 @@ function CartData({ id, productName, price, productImage }) {
           <span>{cartItemAmount}</span>
           <button
             className="remove-from-cart"
-            onClick={() => removeFromCart(id)}
+            onClick={() => {
+              if (cartItemAmount > 0) {
+                removeFromCart(id);
+              }
+            }}
           >
             -
           </button>

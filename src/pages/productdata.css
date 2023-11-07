@@ -1,0 +1,30 @@
+h1 {
+  margin-top: 200px;
+}
+
+.product-container {
+  display: flex;
+  justify-content: center;
+}
+
+.product-card {
+  margin-top: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 70vh;
+  gap: 100px;
+}
+
+.product-card img {
+  height: 410px;
+}
+
+.product-description {
+  text-align: start;
+}
+
+.remove-from-cart {
+  margin-left: 10px;
+}
